@@ -6,11 +6,13 @@
     <title>My Writings - Harshit Pachauri</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Crimson+Text:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         body {
             background: #1a1a1a;
             color: #e0e0e0;
+            font-family: 'Crimson Text', serif;
+            position: relative;
         }
 
         .writing-container {
@@ -106,6 +108,7 @@
             align-self: flex-start;
             border: 1px solid #6c5ce7;
             border-radius: 5px;
+            cursor: pointer;
         }
 
         .read-more:hover {
@@ -137,6 +140,172 @@
             box-shadow: 0 0 15px rgba(108, 92, 231, 0.3);
         }
 
+        /* Poem Modal Styles */
+        .poem-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .poem-container {
+            max-width: 700px;
+            width: 90%;
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            border-radius: 15px;
+            position: relative;
+            animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 10px 50px rgba(108, 92, 231, 0.3);
+            border: 2px solid #6c5ce7;
+            overflow: hidden;
+        }
+
+        .poem-header {
+            padding: 2rem 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .poem-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+        }
+
+        .poem-date {
+            font-family: 'Crimson Text', serif;
+            color: #a29bfe;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .poem-content {
+            padding: 0 3rem 2rem;
+            position: relative;
+        }
+
+        .poem-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            line-height: 2;
+            color: #e0e0e0;
+            text-align: center;
+            direction: ltr;
+            background: rgba(45, 45, 45, 0.6);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            border: 1px solid rgba(108, 92, 231, 0.3);
+        }
+
+        .poem-text::before,
+        .poem-text::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #a29bfe, transparent);
+            left: 10%;
+        }
+
+        .poem-text::before {
+            top: 15px;
+        }
+
+        .poem-text::after {
+            bottom: 15px;
+        }
+
+        .author-name {
+            text-align: right;
+            font-style: italic;
+            color: #a29bfe;
+            margin-top: 1.5rem;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.2rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #a29bfe;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .poem-decorative-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .poem-decorative-border::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid #a29bfe;
+            border-radius: 10px;
+        }
+
+        .poem-decorative-element {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #a29bfe;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .decorative-element-1 {
+            top: -20px;
+            left: -20px;
+        }
+
+        .decorative-element-2 {
+            bottom: -20px;
+            right: -20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 768px) {
             .writing-container {
                 margin-top: 80px;
@@ -151,6 +320,15 @@
                 top: 1rem;
                 left: 1rem;
                 padding: 0.8rem 1.5rem;
+            }
+
+            .poem-title {
+                font-size: 2rem;
+            }
+
+            .poem-text {
+                font-size: 1.2rem;
+                padding: 2rem;
             }
         }
     </style>
@@ -169,25 +347,146 @@
         <div class="writing-grid">
             <div class="writing-card">
                 <div class="date">March 15, 2024</div>
-                <h3>My First Poem</h3>
-                <a href="#" class="read-more">Read More</a>
+                <h3>Najar</h3>
+                <a class="read-more" onclick="openPoem('firstPoem')">Read More</a>
             </div>
             <div class="writing-card">
                 <div class="date">August 5, 2024</div>
-                <h3>A Day in College</h3>
-                <a href="#" class="read-more">Read More</a>
+                <h3>Pasand - Poem</h3>
+                <a class="read-more" onclick="openPoem('secondPoem')">Read More</a>
             </div>
             <div class="writing-card">
                 <div class="date">December 3, 2024</div>
                 <h3>Lucid Dreams</h3>
-                <a href="#" class="read-more">Read More</a>
+                <a class="read-more" onclick="openPoem('thirdPoem')">Read More</a>
             </div>
             <div class="writing-card">
                 <div class="date">June 20, 2024</div>
-                <h3>Friendship is a Journey</h3>
-                <a href="#" class="read-more">Read More</a>
+                <h3>Library of people</h3>
+                <a class="read-more" onclick="openPoem('fourthPoem')">Read More</a>
             </div>
         </div>
     </div>
+
+    <!-- First Poem Modal -->
+    <div id="firstPoem" class="poem-modal">
+        <div class="poem-container">
+            <button class="close-modal" onclick="closePoem('firstPoem')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="poem-decorative-border">
+                <div class="poem-decorative-element decorative-element-1"></div>
+                <div class="poem-decorative-element decorative-element-2"></div>
+            </div>
+            <div class="poem-header">
+                <h2 class="poem-title">My First Poem</h2>
+                <div class="poem-date">March 15, 2024</div>
+            </div>
+            <div class="poem-content">
+                <div class="poem-text">
+                    देखता था तुमको मैं नजरें झुका के<br>
+                    बातों को दिल की में दिल में दबा के<br>
+                    कोशिश तो की थी मैंने नजरें उठाने की<br>
+                    दबी हुई बात दिल की तुमको बताने की<br>
+                    बस इंतजार था मुझको हमारी नजरें मिलने का<br>
+                    काश थोड़ी कोशिश तुमने भी की होती नजरें उठाने की<br>
+                    <div class="author-name">-Harshit</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Other poem modals with placeholder content -->
+    <div id="secondPoem" class="poem-modal">
+        <div class="poem-container">
+            <button class="close-modal" onclick="closePoem('secondPoem')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="poem-decorative-border">
+                <div class="poem-decorative-element decorative-element-1"></div>
+                <div class="poem-decorative-element decorative-element-2"></div>
+            </div>
+            <div class="poem-header">
+                <h2 class="poem-title">Pasand - Poem</h2>
+                <div class="poem-date">August 5, 2024</div>
+            </div>
+            <div class="poem-content">
+                <div class="poem-text">
+                    <!-- Placeholder - Add your poem here -->
+                    ...<br>
+                    <div class="author-name">-Harshit</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="thirdPoem" class="poem-modal">
+        <div class="poem-container">
+            <button class="close-modal" onclick="closePoem('thirdPoem')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="poem-decorative-border">
+                <div class="poem-decorative-element decorative-element-1"></div>
+                <div class="poem-decorative-element decorative-element-2"></div>
+            </div>
+            <div class="poem-header">
+                <h2 class="poem-title">Lucid Dreams</h2>
+                <div class="poem-date">December 3, 2024</div>
+            </div>
+            <div class="poem-content">
+                <div class="poem-text">
+                    <!-- Placeholder - Add your poem here -->
+                    ...<br>
+                    <div class="author-name">-Harshit</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fourthPoem" class="poem-modal">
+        <div class="poem-container">
+            <button class="close-modal" onclick="closePoem('fourthPoem')">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="poem-decorative-border">
+                <div class="poem-decorative-element decorative-element-1"></div>
+                <div class="poem-decorative-element decorative-element-2"></div>
+            </div>
+            <div class="poem-header">
+                <h2 class="poem-title">Library of people</h2>
+                <div class="poem-date">June 20, 2024</div>
+            </div>
+            <div class="poem-content">
+                <div class="poem-text">
+                    <!-- Placeholder - Add your poem here -->
+                  ...<br>
+                    <div class="author-name">-Harshit</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPoem(poemId) {
+            document.getElementById(poemId).style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closePoem(poemId) {
+            document.getElementById(poemId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('poem-modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = "none";
+                    document.body.style.overflow = "auto";
+                }
+            }
+        }
+    </script>
 </body>
-</html> 
+</html>
