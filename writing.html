@@ -159,6 +159,7 @@
         .poem-container {
             max-width: 700px;
             width: 90%;
+            /* max-height: 80vh; */
             background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
             border-radius: 15px;
             position: relative;
@@ -166,12 +167,16 @@
             box-shadow: 0 10px 50px rgba(108, 92, 231, 0.3);
             border: 2px solid #6c5ce7;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .poem-header {
-            padding: 2rem 2rem 0;
+            padding: 0 3rem 2 rem;
             text-align: center;
             position: relative;
+            overflow-y: auto;
+            max-height: calc(80vh-150px);
         }
 
         .poem-title {
@@ -294,6 +299,40 @@
             bottom: -20px;
             right: -20px;
         }
+        #secondPoem .poem-container {
+            max-height: 80vh; /* Limit height to 80% of viewport height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #secondPoem .poem-header {
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+
+        #secondPoem .poem-content {
+            overflow-y: auto; /* Enable vertical scrolling only for this poem */
+            max-height: calc(80vh - 150px); /* Adjust based on header size */
+            flex-grow: 1; /* Allow content to expand */
+        }
+
+        /* Scrollbar styling only for second poem */
+        #secondPoem .poem-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #secondPoem .poem-content::-webkit-scrollbar-track {
+            background: rgba(45, 45, 45, 0.6);
+            border-radius: 10px;
+        }
+
+        #secondPoem .poem-content::-webkit-scrollbar-thumb {
+            background: #6c5ce7;
+            border-radius: 10px;
+        }
+
+        #secondPoem .poem-content::-webkit-scrollbar-thumb:hover {
+            background: #a29bfe;
+        }
 
         @keyframes fadeIn {
             from {
@@ -413,7 +452,39 @@
             <div class="poem-content">
                 <div class="poem-text">
                     <!-- Placeholder - Add your poem here -->
-                    ...<br>
+                    
+
+वो पूछती थी, <br>
+पसंद क्या है उसमें मुझे<br>
+मैं "सबकुछ" कह देता था<br>
+और वो चुप हो जाती थी<br>
+सोचता था क्यों हो जाती थी चुप वो<br>
+मुझे सच , उसका सबकुछ पसंद था..<br>
+या<br>
+शायद नहीं , मैं ही झूठ कहता था<br>
+भला कैसे किसी इंसान को <br>
+किसी में सबकुछ पसंद हो सकता है<br>
+वो मुझे थोड़ा सा नापसंद था<br>
+
+उसका न देखना.....नापसंद था<br>
+उसका मुंह फेरना....नापसंद था<br>
+जब करती थी औरों से बातें , हंसके <br>
+उसका वो हंसना मुझे नापसंद था<br>
+बुलाकर चले जाना.....नापसंद था<br>
+पास होकर रहना दूर मुझसे नापसंद था<br>
+नाराजगी में करती थी बातें मुझसे , प्यार से <br>
+उसका वो झूठा प्यार मुझे नापसंद था<br>
+
+नहीं बोल पाया उसे कभी कि मुझे उसमें पसंद क्या है<br>
+आज कल उसका वो पुछना थोड़ा मुझसे बंद सा है <br>
+नहीं करती अब वो बातें जो वो किया करती थी<br>
+शायद, "क्या कहेंगे लोग" इससे वो डरती थी<br>
+यही था कारण हम दूर होते गए <br>
+अरमान उसके...मेरे लिए तब से सोते रहे<br>
+फिर<br>
+नहीं पूंछा उसने कि मुझे क्या पसंद था<br>
+इस बार जवाब था मेरे पास , बातें रह गई अधूरी<br>
+नहीं बता पाया की वही था जो मुझे हां पसंद था....<br>
                     <div class="author-name">-Harshit</div>
                 </div>
             </div>
